@@ -1,13 +1,22 @@
 # Assignment-5
 
-clc; clear; close all;
-% Assignment Question for experiment 3
-k1 = 10; k4 = k1; k2 = 30; k3 = k2;
-x1 = 0.05; x2 = 0.04; x3 = 0.03;
-m = 1;% m1 = m2 = m3 = m = 1kg
-% Convert the syste of equation into matrix form
-k = [(k1+k2)/m -k2/m 0; -k2/m (k2+k3)/m -k3/m; 0 -k3/m (k3+k4)/m];
-x= [x1; x2; x3];
-a = -k*x;
-disp("The acceleration of mass are:");
-disp(a);
+x = linspace(0, 10, 50);
+y = x.^10 - 1;
+x1 = 0;
+xu = 1.3;
+err = 0.01;
+iter = 1;
+while abs(xu-x1)>err
+    xr = (x1+xu)/2;
+    y1 = x1.^10 - 1;
+    yr = xr.^10 - 1;
+    yu = xu.^10 - 1;
+    if y1*yr < 0
+        xu = xr;
+    else
+        x1 = xr;
+    end
+    iter = iter + 1;
+end
+fprintf('root of equation = %f',xr);
+plot(x,y);
